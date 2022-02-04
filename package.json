@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "mongoose": "^6.1.10",
-    "mongoose-auto-increment": "^5.0.1"
+    "mongoose-auto-increment": "^5.0.1",
+    "regex": "^0.1.1"
   }
 }

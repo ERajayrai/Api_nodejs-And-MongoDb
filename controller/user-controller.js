@@ -18,7 +18,12 @@ export const addUsers = async (request, response) => {
     const newUser = new Employee(employee)
     try {
         const one = await newUser.save();
-        response.json(one);
+        if(one!==null){
+            response.json(1)
+        }
+        else{
+            response.json(0);
+        }
     } catch (error) {
         console.log(error);
     }
@@ -51,8 +56,6 @@ export const editUser = async (request, response) => {
     }
 }
 export const deleteUser = async (request, response) => {
-
-    console.log(request.params.id)
     try {
         const userDalete=await Employee.deleteOne({ _id: request.params.id });
         response.json(userDalete);
@@ -61,4 +64,18 @@ export const deleteUser = async (request, response) => {
         response.json({ message: error.message })
         console.log(error)
     }
+}
+export const getUsersByKeyWord=async(request,response)=>{
+    const filterName=request.query.name;
+    try {
+        if(filterName!==''){
+            const employee = await Employee.find({name:{$regex:filterName,$options:'$i'}});
+        response.json(employee)
+        }
+        
+    } catch (error) {
+        response.json({ message: error.message })
+        console.log(error)
+    }
+
 }
